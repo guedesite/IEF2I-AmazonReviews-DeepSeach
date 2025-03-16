@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommandations</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recommandations pour {{ user_id }}</h1>
+    {% if recommendations %}
+        <table>
+            <tr>
+                <th>ASIN</th>
+                <th>Titre</th>
+                <th>Catégorie</th>
+                <th>Prix</th>
+                <th>Description</th>
+            </tr>
+            {% for item in recommendations %}
+                <tr>
+                    <td>{{ item.asin | default('N/A') }}</td>
+                    <td>{{ item.title | default('N/A') }}</td>
+                    <td>{{ item.category | default('N/A') }}</td>
+                    <td>{{ item.price | default('N/A') }}</td>
+                    <td>{{ item.description | default('N/A') }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Aucune recommandation disponible.</p>
+    {% endif %}
+    <a href="/">Retour</a>
+</body>
+</html>

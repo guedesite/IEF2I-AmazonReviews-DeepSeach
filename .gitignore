@@ -172,3 +172,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+model.onnx
+amazon_reviews_2023.json

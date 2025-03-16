@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Système de recommandation</title>
+</head>
+<body>
+    <h1>Sélectionnez un utilisateur</h1>
+    <form method="post">
+        <select name="user_id">
+            {% for uid in user_ids %}
+                <option value="{{ uid }}">{{ uid }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Obtenir les recommandations">
+    </form>
+</body>
+</html>
