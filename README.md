@@ -116,14 +116,14 @@ Ce projet est un système de recommandation basé sur un autoencodeur entraîné
 ## Conversion du modèle en format OpenVINO IR
 
 1. **Vérifier la forme d'entrée**
-   - Après l'entraînement, notez le nombre d'articles (`num_items`) affiché dans `Shape of user_item_matrix: (num_users, num_items)` dans la sortie de `train.py`. Par exemple, si `num_items = 50000`, la forme d'entrée sera `[1, 50000]`.
+   - Après l'entraînement, notez le nombre d'articles (`num_items`) affiché dans `Shape of user_item_matrix: (num_users, num_items)` dans la sortie de `train.py`. Par exemple, si `num_items = 31177`, la forme d'entrée sera `[1, 31177]`.
 
 2. **Convertir avec Model Optimizer (mo)**
    - Utilisez la commande suivante pour convertir `model.onnx` en `model.xml` et `model.bin` :
      ```bash
-     mo --input_model model.onnx --output_dir . --input_shape "[1,50000]"
+     mo --input_model model.onnx --output_dir . --input_shape "[1,31177]"
      ```
-   - Remplacez `50000` par le `num_items` réel de votre matrice.
+   - Remplacez `31177` par le `num_items` réel de votre matrice.
 
 3. **Résultat**
    - Les fichiers `model.xml` et `model.bin` seront générés dans le dossier `./IEF2I-AmazonReviews-DeepSeach/`.
@@ -132,7 +132,7 @@ Ce projet est un système de recommandation basé sur un autoencodeur entraîné
    - Si `mo` échoue ou si vous préférez la nouvelle méthode :
      ```python
      from openvino import convert_model, save_model
-     ov_model = convert_model("model.onnx", input_shape=[1, 50000])  # Ajustez la forme
+     ov_model = convert_model("model.onnx", input_shape=[1, 31177])  # Ajustez la forme
      save_model(ov_model, "model.xml")
      ```
    - Exécutez ce code dans un script Python séparé.
